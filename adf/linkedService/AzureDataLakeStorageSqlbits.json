@@ -1,0 +1,10 @@
+{
+	"name": "AzureDataLakeStorageSqlbits",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://haakonsqlbits24sa.dfs.core.windows.net/"
+		}
+	}
+}
