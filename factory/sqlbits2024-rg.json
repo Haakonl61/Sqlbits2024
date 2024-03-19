@@ -1,0 +1,9 @@
+{
+	"name": "sqlbits2024-rg",
+	"location": "northeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "b3895f68-ee4b-43f1-99b2-32ab652527aa",
+		"tenantId": "853e8b83-4054-4eb9-8b26-ec6513dd213d"
+	}
+}
