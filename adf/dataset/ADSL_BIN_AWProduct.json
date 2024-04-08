@@ -1,0 +1,19 @@
+{
+	"name": "ADSL_BIN_AWProduct",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorageSqlbits",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Product.csv",
+				"folderPath": "Root",
+				"fileSystem": "hllakeroot"
+			}
+		}
+	}
+}
