@@ -64,16 +64,6 @@
 				"type": "string"
 			}
 		},
-		"variables": {
-			"Entities": {
-				"type": "Array",
-				"defaultValue": [
-					"Product",
-					"ProductSubcategory",
-					"ProductCategory"
-				]
-			}
-		},
 		"annotations": []
 	}
 }
