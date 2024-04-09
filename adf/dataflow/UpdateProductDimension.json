@@ -29,13 +29,16 @@
 			"sinks": [],
 			"transformations": [
 				{
-					"name": "select1"
+					"name": "SelectProductColumns"
 				},
 				{
-					"name": "select2"
+					"name": "SelectProductSubcategoryColumns"
 				},
 				{
-					"name": "select3"
+					"name": "SelectProductCategoryColumns"
+				},
+				{
+					"name": "LookupProductCategory"
 				}
 			],
 			"scriptLines": [
@@ -94,20 +97,24 @@
 				"          SubcategoryId",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1",
+				"     skipDuplicateMapOutputs: true) ~> SelectProductColumns",
 				"ProductSubcategory select(mapColumn(",
 				"          SubcategoryId,",
 				"          CategoryId,",
 				"          Subcategory",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select2",
+				"     skipDuplicateMapOutputs: true) ~> SelectProductSubcategoryColumns",
 				"ProductCategory select(mapColumn(",
 				"          CategoryId,",
 				"          Category",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select3"
+				"     skipDuplicateMapOutputs: true) ~> SelectProductCategoryColumns",
+				"SelectProductSubcategoryColumns, SelectProductCategoryColumns lookup(SelectProductSubcategoryColumns@CategoryId == SelectProductCategoryColumns@CategoryId,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> LookupProductCategory"
 			]
 		}
 	}
