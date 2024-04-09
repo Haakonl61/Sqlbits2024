@@ -27,12 +27,16 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "select1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
-				"          {_col0_} as short,",
-				"          {_col1_} as string,",
-				"          {_col2_} as string,",
+				"          ProductId as integer,",
+				"          Product as string,",
+				"          SubcategoryId as integer,",
 				"          {_col3_} as boolean,",
 				"          {_col4_} as boolean,",
 				"          {_col5_} as string,",
@@ -59,7 +63,14 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> Product",
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          SubcategoryId as integer,",
+				"          CategoryId as integer,",
+				"          Subcategory as string,",
+				"          {_col3_} as string,",
+				"          {_col4_} as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> ProductSubcategory",
 				"source(output(",
@@ -70,7 +81,14 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> ProductCategory"
+				"     ignoreNoFilesFound: false) ~> ProductCategory",
+				"Product select(mapColumn(",
+				"          ProductId,",
+				"          Product,",
+				"          SubcategoryId",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}
