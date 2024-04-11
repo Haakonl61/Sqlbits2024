@@ -15,8 +15,11 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "@{dataset().Entity}.tsv",
-				"folderPath": "Root",
+				"fileName": {
+					"value": "@{dataset().Entity}.tsv",
+					"type": "Expression"
+				},
+				"folderPath": "raw",
 				"fileSystem": "hllakeroot"
 			}
 		}

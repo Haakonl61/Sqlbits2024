@@ -1,0 +1,40 @@
+{
+	"name": "DimProductViewer",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "AzureDataLakeStorageSqlbits",
+						"type": "LinkedServiceReference"
+					},
+					"name": "DimProduct"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "OrderBySubcategory"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          ProductId as integer,",
+				"          Product as string,",
+				"          SubcategoryId as integer,",
+				"          CategoryId as integer,",
+				"          Subcategory as string,",
+				"          Category as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delta',",
+				"     fileSystem: 'hllakeroot',",
+				"     folderPath: 'Conformed/DimProduct') ~> DimProduct",
+				"DimProduct sort(asc(Subcategory, false)) ~> OrderBySubcategory"
+			]
+		}
+	}
+}
