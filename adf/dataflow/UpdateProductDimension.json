@@ -39,6 +39,9 @@
 				},
 				{
 					"name": "LookupProductCategory"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -91,7 +94,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> ProductCategory",
-				"Product select(mapColumn(",
+				"select1 select(mapColumn(",
 				"          ProductId,",
 				"          Product,",
 				"          SubcategoryId",
@@ -114,7 +117,14 @@
 				"SelectProductSubcategoryColumns, SelectProductCategoryColumns lookup(SelectProductSubcategoryColumns@CategoryId == SelectProductCategoryColumns@CategoryId,",
 				"     multiple: false,",
 				"     pickup: 'any',",
-				"     broadcast: 'auto')~> LookupProductCategory"
+				"     broadcast: 'auto')~> LookupProductCategory",
+				"Product select(mapColumn(",
+				"          ProductId,",
+				"          Product,",
+				"          SubcategoryId",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}
