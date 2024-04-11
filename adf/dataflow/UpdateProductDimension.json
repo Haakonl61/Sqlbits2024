@@ -29,9 +29,6 @@
 			"sinks": [],
 			"transformations": [
 				{
-					"name": "SelectProductColumns"
-				},
-				{
 					"name": "SelectProductSubcategoryColumns"
 				},
 				{
@@ -41,7 +38,7 @@
 					"name": "LookupProductCategory"
 				},
 				{
-					"name": "select1"
+					"name": "SelectProductColumns"
 				}
 			],
 			"scriptLines": [
@@ -94,13 +91,6 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> ProductCategory",
-				"select1 select(mapColumn(",
-				"          ProductId,",
-				"          Product,",
-				"          SubcategoryId",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> SelectProductColumns",
 				"ProductSubcategory select(mapColumn(",
 				"          SubcategoryId,",
 				"          CategoryId,",
@@ -114,7 +104,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> SelectProductCategoryColumns",
-				"SelectProductSubcategoryColumns, SelectProductCategoryColumns lookup(SelectProductSubcategoryColumns@CategoryId == SelectProductCategoryColumns@CategoryId,",
+				"SelectProductSubcategoryColumns, SelectProductCategoryColumns lookup(select2@CategoryId == SelectProductCategoryColumns@CategoryId,",
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> LookupProductCategory",
@@ -124,7 +114,7 @@
 				"          SubcategoryId",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> SelectProductColumns"
 			]
 		}
 	}
