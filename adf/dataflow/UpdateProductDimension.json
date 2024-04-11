@@ -26,7 +26,15 @@
 					"name": "ProductCategory"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"linkedService": {
+						"referenceName": "AzureDataLakeStorageSqlbits",
+						"type": "LinkedServiceReference"
+					},
+					"name": "WriteToDataLake"
+				}
+			],
 			"transformations": [
 				{
 					"name": "SelectProductSubcategoryColumns"
@@ -134,7 +142,26 @@
 				"          Category",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> ExcludeDuplicateColumns"
+				"     skipDuplicateMapOutputs: true) ~> ExcludeDuplicateColumns",
+				"ExcludeDuplicateColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'delta',",
+				"     fileSystem: 'hllakeroot',",
+				"     folderPath: 'Conformed/DimProduct',",
+				"     deltaTruncate: true,",
+				"     mergeSchema: false,",
+				"     autoCompact: false,",
+				"     optimizedWrite: false,",
+				"     vacuum: 0,",
+				"     deletable: false,",
+				"     insertable: true,",
+				"     updateable: false,",
+				"     upsertable: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> WriteToDataLake"
 			]
 		}
 	}
