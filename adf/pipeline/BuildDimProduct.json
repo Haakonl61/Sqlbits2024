@@ -20,13 +20,13 @@
 						"type": "DataFlowReference",
 						"datasetParameters": {
 							"Product": {
-								"FileName": "Product.tsv"
+								"FileName": "Product"
 							},
 							"ProductSubcategory": {
-								"FileName": "ProductSubCategory.tsv"
+								"FileName": "ProductSubCategory"
 							},
 							"ProductCategory": {
-								"FileName": "ProductCategory.tsv"
+								"FileName": "ProductCategory"
 							}
 						}
 					},
