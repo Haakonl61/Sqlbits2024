@@ -125,7 +125,7 @@
 				"Product select(mapColumn(",
 				"          ProductId,",
 				"          Product,",
-				"          SubcategoryId = {_col2_}",
+				"          SubcategoryId",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> SelectProductColumns",
