@@ -12,10 +12,14 @@
 					"name": "DimProduct"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "DummySink"
+				}
+			],
 			"transformations": [
 				{
-					"name": "sort1"
+					"name": "SortBySubCategory"
 				}
 			],
 			"scriptLines": [
@@ -33,7 +37,14 @@
 				"     format: 'delta',",
 				"     fileSystem: 'hllakeroot',",
 				"     folderPath: 'Conformed/DimProduct') ~> DimProduct",
-				"DimProduct sort(asc(Subcategory, true)) ~> sort1"
+				"DimProduct sort(asc(Subcategory, false)) ~> SortBySubCategory",
+				"SortBySubCategory sink(validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     store: 'cache',",
+				"     format: 'inline',",
+				"     output: false,",
+				"     saveOrder: 1) ~> DummySink"
 			]
 		}
 	}
