@@ -33,7 +33,7 @@
 				"     format: 'delta',",
 				"     fileSystem: 'hllakeroot',",
 				"     folderPath: 'Conformed/DimProduct') ~> DimProduct",
-				"DimProduct sort(desc(Subcategory, true)) ~> sort1"
+				"DimProduct sort(asc(Subcategory, true)) ~> sort1"
 			]
 		}
 	}
